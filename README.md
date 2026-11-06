@@ -1,7 +1,7 @@
 # quant-foundations
 
-Short experiments from my self-study of the mathematics behind quantitative finance. Each one starts from a question, ends with a figure and a finding, and is small enough to read in ten minutes.
-
+I'm doing a bunch of projects alongside my classes to test out some _fairly ball_ experiments. Just want to see how what I’m learning applies to the real world and pick up some industry skills.
+These include short experiments (and other ideas I've entertained) from my self-study of the math behind quant finance. I hope to post them all here as a timeline of where my thoughts and curiosity went. I'll post all the results, code, etc. here. Just decided now to push them to the git because why not. 
 | | Project | Question |
 |---|---|---|
 | 01 | [Dice, Fourier and the shape of a sum](01-dice-fourier) | What's the exact distribution of 50 dice, how fast can I get it, and how wrong is the bell curve? |
