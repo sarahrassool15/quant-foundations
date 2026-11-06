@@ -5,3 +5,4 @@ These include short experiments (and other ideas I've entertained) from my self-
 | | Project | Question |
 |---|---|---|
 | 01 | [Dice, Fourier and the shape of a sum](01-dice-fourier) | What's the exact distribution of 50 dice, how fast can I get it, and how wrong is the bell curve? |
+| 02 | [The leakage hunter](02-leakage-hunter) | How much predictive power can a pipeline "find" in pure noise? |
