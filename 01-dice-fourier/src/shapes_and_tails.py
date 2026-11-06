@@ -12,7 +12,7 @@ from dice import pmf_convolution, pmf_fft
 # one die: mean 3.5, variance 35/12
 MU, VAR = 3.5, 35 / 12
 
-# ---- Figure 1: the shape appears ----
+# Fig 1: the shape appears 
 fig, axes = plt.subplots(1, 4, figsize=(14, 3.2))
 for ax, n in zip(axes, [1, 2, 5, 50]):
     pmf = pmf_convolution(n)
@@ -28,7 +28,7 @@ plt.tight_layout()
 plt.savefig("figures/shapes.png", dpi=150)
 print("saved figures/shapes.png")
 
-# ---- Figure 2: the right tail for 50 dice ----
+# Fig 2: the right tail for 50 dice 
 n = 50
 exact = pmf_convolution(n)
 fft = pmf_fft(n)

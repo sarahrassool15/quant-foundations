@@ -20,7 +20,8 @@ def pmf_convolution(n, die=FAIR_D6):
 
 
 def pmf_fft(n, die=FAIR_D6, N=None):
-    # The Fourier way. The FFT of the die is its characteristic function
+    # The Fourier way
+    # The FFT of the die is its characteristic function
     # sampled on a grid. Adding independent dice multiplies characteristic
     # functions, so n dice is just the n-th power. Then I transform back.
     max_sum = n * (len(die) - 1)
@@ -30,6 +31,6 @@ def pmf_fft(n, die=FAIR_D6, N=None):
     pmf = np.fft.ifft(phi ** n).real
     return pmf
 
-# NOTE: if N is smaller than max_sum + 1, the FFT can't tell sums apart that
-# differ by a multiple of N, so they land on top of each other (wrap-around).
-# wraparound.py shows what that looks like.
+# NOTE to self: if N is smaller than max_sum + 1, the FFT can't tell sums apart that
+# differ by a multiple of N, so they land on top of each other 
+# so wraparound.py shows what that looks like

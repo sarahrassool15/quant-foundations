@@ -1,8 +1,8 @@
 """
-What happens if the FFT grid is too short?
+We ask the following: what happens if the FFT grid is too short?
 Sum of 10 dice runs from 10 to 60, so it needs 61 points.
-With only 40, everything above 39 wraps around and lands on top of
-the low sums.
+With only 40 everything above 39 wraps around and lands on top of
+the low sums
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ n = 10
 exact = pmf_convolution(n)            # length 61
 short = pmf_fft(n, N=40)              # too short on purpose
 
-# by hand: fold the exact answer onto 40 slots (sum s goes to slot s mod 40)
+# by hand: fold the exact answer onto 40 slots
 folded = np.zeros(40)
 for s, p in enumerate(exact):
     folded[s % 40] += p

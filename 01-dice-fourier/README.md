@@ -4,11 +4,11 @@
 
 ## The idea
 
-The sum of two independent dice has the convolution of their distributions. So one way to get n dice is to convolve n times. That works, but the cost grows like n².
+The sum of two independent dice has the convolution of their distributions. So one way to get n dice is to convolve n times. That works but the problem is that the cost grows like n²
 
-The other way goes through Fourier. The characteristic function of a random variable, φ(t) = E[e^{itX}], turns sums into products: if S = X₁ + … + Xₙ with independent, identical Xᵢ, then φ_S(t) = φ(t)ⁿ. The FFT of the die's probability vector *is* its characteristic function sampled on a grid. So I take the FFT once, raise it to the n-th power, and invert. That costs about n log n.
+The other way goes through Fourier! The characteristic function of a random variable, φ(t) = E[e^{itX}] which essentially turns sums into products: if S = X₁ + … + Xₙ with independent, identical Xᵢ, then φ_S(t) = φ(t)ⁿ. The FFT of the die's probability vector *is* its characteristic function sampled on a grid. So I take the FFT once raise it to the n-th power, and invert. That costs about n log n.
 
-I wanted to see three things: how much faster it really is, what goes wrong if you're careless, and what the exact answer says about the normal approximation.
+I wanted to see three things: how much faster it really is, what goes wrong if you're careless, and what the exact answer says about the normal approximation
 
 ## What I found
 
@@ -34,8 +34,8 @@ I wanted to see three things: how much faster it really is, what goes wrong if y
 | P(S ≥ 300) | 1.2e-39 | 3.2e-25 | about 10¹⁴ |
 
 - The normal approximation is decent in the middle but overstates the far tail by orders of magnitude. Dice can't go above 6, and a normal distribution doesn't know that.
-- The FFT matches the exact answer to within 5e-17 everywhere, but that's an *absolute* error. Once the true tail probability drops below about 1e-15, the FFT is just showing rounding noise (the flat red dots).
-- Repeated convolution only ever adds and multiplies positive numbers, so it keeps its *relative* accuracy all the way down. It correctly gets P(all fifty dice show 6) = (1/6)⁵⁰ ≈ 1.2e-39.
+- The FFT matches the exact answer to within 5e-17 everywhere, but that's an *absolute* error. Once the true tail probability drops below about 1e-15 the FFT is just showing rounding noise (the flat red dots).
+- Repeated convolution only ever adds and multiplies positive numbers, so it keeps its *relative* accuracy all the way down. It correctly gets P(all fifty dice show 6) = (1/6)⁵⁰ ≈ 1.2e-39
 
 ![tails](figures/tails.png)
 
@@ -43,7 +43,7 @@ So the fast method has a floor, and the slow method doesn't. That trade-off is t
 
 ## Why I care
 
-The price of an asset over a month is also a sum of many small random moves. For many models of returns the density has no simple formula, but the characteristic function does, and option prices can be computed with exactly this FFT trick (Carr and Madan, 1999). The same two warnings carry over: the grid has to be wide enough, and far out-of-the-money prices sit in the tail, where the FFT's noise floor lives. That's where I'm going next.
+    I thought of this because when we look at the price of an asset over a month it is also a sum of many small random moves. For many models of returns the density has no simple formula, but the characteristic function does, and option prices can be computed with exactly this FFT trick (Carr and Madan, 1999), which i came across recently. In essence, the same two warnings carry over: the grid has to be wide enough, and far out-of-the-money prices sit in the tail, where the FFT's noise floor lives 
 
 ## Run it
 
