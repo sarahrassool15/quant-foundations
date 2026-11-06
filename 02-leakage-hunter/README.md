@@ -1,12 +1,12 @@
-# The leakage hunter: getting R² = 0.25 out of pure noise
+# The leakage hunter: getting R² = 0.25 out of pure noise!!!
 
 **Question:** how much predictive power can a forecasting pipeline "find" in data that has none?
 
 ## Why I built this
 
-In my [Bitcoin volatility project](https://github.com/sarahrassool15/btc-volatility-forecasting), I found that about 82% of my original 5-minute R² came from the target window overlapping the feature window. The model wasn't predicting the future; part of the "future" was already in its inputs. Nothing about the result looked wrong at the time. It just looked good.
+In my [Bitcoin volatility project](https://github.com/sarahrassool15/btc-volatility-forecasting) I found that about 82% of my original 5 minute R² came from the target window overlapping the literal feature window. The model wasn't predicting the future and part of the "future" was already in its inputs. What bothers me most is that nothing looked wrong. No error, no warning, no weirdness in the look of the plot. Leakage doesn’t mess up your code. It honetsly just flatters you. A model that’s bad looks bad. And so a model that’s secretly cheating looks like your best work.
 
-So I wanted a test that catches this kind of mistake *before* I believe a result. On real data you can't, because you never know how much signal is really there. On pure noise you do: the right answer is zero. Any pipeline that scores above zero on noise is leaking.
+So I wanted a test and TOOL that catches this kind of mistake *before* I believe a result because it took me a while to realize when I first started doing these projects. On real data you can't because you never know how much signal is really there. On pure noise you do and the right answer is zero. Any pipeline that scores above zero on noise is just leaking! 
 
 ## The setup
 
