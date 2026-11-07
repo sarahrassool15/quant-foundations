@@ -8,3 +8,4 @@ These include short experiments (and other ideas I've entertained) from my self-
 | 02 | [The leakage hunter](02-leakage-hunter) | How much predictive power can a pipeline "find" in pure noise? |
 | 03 | [Does Bitcoin's maximum behave like Brownian motion's?](03-bitcoin-maximum) | How far does Bitcoin wander from the open each day, and is that what Brownian motion predicts? |
 
+| 04 | [Kelly betting, and why traders bet half](04-kelly) | How much should you risk when your wealth multiplies, and what changes when you don't know your edge? |
