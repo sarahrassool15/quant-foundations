@@ -1,7 +1,7 @@
 """
-One year of 1-minute BTC/USDT candles from the Binance US public API.
+One year of 1 minute BTC/USDT candles from the Binance US public API
 The end date is fixed so anyone re-running this gets the same data.
-Takes a few minutes (about 530 requests).
+Takes a few minutes because its about 530 requests. 
 """
 import os
 import time

@@ -32,7 +32,7 @@ dt_fine = 1 / n_fine
 paths = np.cumsum(rng.standard_normal((n_paths, n_fine)) * np.sqrt(dt_fine), axis=1)
 paths = np.hstack([np.zeros((n_paths, 1)), paths])     # W_0 = 0, rule 1 of BM
 
-# ---- fact 1: the max behaves like |Z| ----
+# fact 1: the max behaves like |Z|
 # why: split P(max >= a) by where the path ENDS:
 #   ends above a -> it obviously touched a  -> that's just P(W_T >= a)
 #   ends below a -> flip everything after the first touch around a:
@@ -46,8 +46,7 @@ paths = np.hstack([np.zeros((n_paths, 1)), paths])     # W_0 = 0, rule 1 of BM
 m = paths.max(axis=1)
 print("fact 1: P(max >= a), simulated vs 2*(1 - Phi(a))")
 for a in [0.5, 1.0, 1.5, 2.0, 2.5]:
-    # norm.sf(a) = 1 - norm.cdf(a), but more accurate far out in the tail
-    # (1 - 0.99999999... throws digits away, same lesson as the FFT floor)
+    # check for correctness 
     print(f"  a = {a}:  simulated {np.mean(m >= a):.4f}   formula {2 * norm.sf(a):.4f}")
 
 # mean of |Z| = sqrt(2/pi):
@@ -58,14 +57,14 @@ for a in [0.5, 1.0, 1.5, 2.0, 2.5]:
 #   sub u = z^2/2, du = z dz. the z in front is exactly the derivative of
 #   z^2/2, which is the ONLY reason this integral is doable.
 #   = (2/sqrt(2pi)) * integral_0^inf e^-u du = 2/sqrt(2pi) = sqrt(2/pi)
-# my grid isn't continuous, so the max I see is a bit low: minus beta*sqrt(dt).
+# my grid isn't cts so the max I see is a bit low: minus beta*sqrt(dt).
 print(f"  mean of max: simulated {m.mean():.4f}   formula sqrt(2/pi) - beta*sqrt(dt) = "
       f"{np.sqrt(2 / np.pi) - BETA * np.sqrt(dt_fine):.4f}")
-# NOTE: 0.806 vs 0.793 looks off at first. but the max has a std
-# of about 0.6, so the standard error is 0.6 / sqrt(4000) = 0.0095. I'm
+# NOTE: 0.806 vs 0.793 looks off at first but the max has a std
+# of about like 0.6 so the standard error is 0.6 / sqrt(4000) = 0.0095. I'm
 # about 1.3 standard errors off. that's just noise.
 
-# ---- fact 2: looking less often hides the max ----
+# fact 2: looking less hides the max 
 # the seen max can never be ABOVE the true max (a max over fewer points),
 # so the gap is always >= 0.
 # size: between two looks BM moves about sigma*sqrt(dt), so I miss about that.

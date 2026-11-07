@@ -1,13 +1,13 @@
 """
-Does Bitcoin's daily maximum behave like Brownian motion's?
+Does Bitcoin's daily maximum behave essentially ike Brownian motion's?
 
 For each UTC day:
   up   = log(high / open)   how far it rose above where it started
   down = log(open / low)    how far it fell below
   sigma_day = sqrt(sum of squared 5-minute log returns that day)
 
-If Bitcoin were Brownian motion, up/sigma_day and down/sigma_day should
-both look like |Z| (see simulation.py for why), on every kind of day.
+If Bitcoin were Brownian motion up/sigma_day and down/sigma_day should
+both look like |Z| (see the simulation.py for why) on every kind of day.
 """
 import sys
 import numpy as np
@@ -30,15 +30,15 @@ for day, g in df.groupby("day"):
         continue
     o = g["open"].iloc[0]
 
-    # LOGS, not plain percentages: log returns ADD over time,
-    # log(P2/P0) = log(P2/P1) + log(P1/P0), and BM is a running sum.
+    # LOGS not plain percentages: log returns ADD over time,
+    # log(P2/P0) = log(P2/P1) + log(P1/P0), and BM is a running sum
     # for small moves they're basically the same anyway: log(1+x) ~ x.
     # the open goes on the front as minute 0.
     log_close = np.log(np.r_[o, g["close"].to_numpy()])
 
     # [::5] keeps minutes 0, 5, 10, ... and diff turns prices into
     # 5-minute returns.
-    # why not 1-minute? every price bounces between bid and ask, and that
+    # why not one min? every price bounces between bid and ask, and that
     # noise gets added to EVERY squared return. more returns = more noise
     # piled up. 5 min is the usual compromise.
     r5 = np.diff(log_close[::5])
@@ -54,7 +54,7 @@ for day, g in df.groupby("day"):
 
     row = {"day": day, "sigma": sigma,
            "up": np.log(g["high"].max() / o),
-           # careful with the minus sign: log(low/open) is NEGATIVE (low < open).
+           # NOTE: careful with the minus sign: log(low/open) is NEGATIVE (low < open).
            # log(open/low) = -log(low/open) flips it, so "how far it fell"
            # comes out as a positive number, same as up.
            "down": np.log(o / g["low"].min())}
@@ -72,11 +72,11 @@ print(f"{len(d)} complete days")
 
 z_up, z_down = d["up"] / d["sigma"], d["down"] / d["sigma"]
 
-# ---- 1. the shape of the standardised max ----
+# 1. the shape of the standardised max 
 # under BM: P(z >= x) = 2(1 - Phi(x)), and the mean is sqrt(2/pi) = 0.798.
 # the min should match the max exactly, because -W is also a BM
 # (max of -W = -min of W). if the lows go further than the highs, that's
-# asymmetry BM can't produce.
+# asymmetry BM can't produce
 print("\nP(z >= x):         up      down    Brownian motion")
 for x in [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]:
     print(f"  x = {x}:        {np.mean(z_up >= x):.3f}   {np.mean(z_down >= x):.3f}   {2 * norm.sf(x):.3f}")
@@ -102,7 +102,7 @@ plt.tight_layout()
 plt.savefig("figures/btc_max_distribution.png", dpi=150)
 print("saved figures/btc_max_distribution.png")
 
-# ---- 2. how much of the true high do I miss by looking every k minutes? ----
+# 2. how much of the true high do I miss by looking every k minutes?
 # the candle highs see every trade, so I treat them as the "continuous" max.
 # NOTE: beta = 0.583 is the limit for watching infinitely often. on real
 # grids even PERFECT BM gives less (I checked: about 0.5). so comparing
@@ -132,8 +132,8 @@ print("                 Bitcoin   Brownian benchmark")
 ratios = []
 for k, b in zip(ks, bench):
     gap = d["up"] - d[f"seen_{k}"]
-    # dt = k/1440 is a FRACTION OF A DAY, because sigma_day is per day.
-    # units have to match or the ratio means nothing.
+    # dt = k/1440 is a FRACTION OF A DAY, because sigma_day is per day
+    # units have to match or the ratio means nothing
     ratio = np.mean(gap) / np.mean(d["sigma"] * np.sqrt(k / 1440))
     ratios.append(ratio)
     print(f"  every {k:3d} min:  {ratio:.3f}     {b:.3f}")

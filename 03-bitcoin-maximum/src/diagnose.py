@@ -1,18 +1,18 @@
 """
 Why does Bitcoin wander LESS than Brownian motion?
 
-My suspicion: it's not the max, it's the clock. sigma_day adds up every
-5-minute wiggle. if the price keeps bouncing back, the wiggles pile up in
-sigma_day but the price doesn't actually GET anywhere, so dividing by
-sigma_day makes every day look tamer than it is.
+My suspicion is the following: it's not the max but actually it's the clock. sigma_day adds up every
+5 minute wiggle. if the price keeps bouncing back, the wiggles pile up in
+sigma_day but the price doesn't actually GET anywhere so dividing by
+sigma_day makes every day look tamer than it is
 
-Two checks:
+Two checks
 1. the close. under BM, (close - open) / sigma_day ~ N(0, 1) exactly, so
    its std must be 1. if it's below 1, the clock is overcounting.
-2. a signature plot. recompute sigma_day from 1, 5, 15, 30, 60-minute
+2. a signature plot. recompute sigma_day from 1, 5, 15, 30, 60 minute
    returns. if bounce-back is the story, sigma_day SHRINKS as I sample less
    often (fewer wiggles counted) and the standardised max climbs back
-   towards sqrt(2/pi).
+   towrds sqrt(2/pi).
 """
 import sys
 import numpy as np
@@ -40,7 +40,7 @@ for day, g in df.groupby("day"):
 d = pd.DataFrame(rows)
 print(f"{len(d)} complete days\n")
 
-# ---- check 1: the close ----
+# check 1: the close 
 z_close = d["ret"] / d["sigma_5"]
 print("check 1: (close - open) / sigma_day  (Brownian motion: mean 0, std 1)")
 print(f"  mean {z_close.mean():+.3f}   std {z_close.std():.3f}")
@@ -52,7 +52,7 @@ print(f"  mean standardised max after rescaling by that std:"
       f"   down {(d['down'] / d['sigma_5']).mean() / s:.3f}"
       f"   (Brownian motion: {np.sqrt(2 / np.pi):.3f})")
 
-# ---- check 2: the signature plot ----
+# check 2: the signature plot 
 print("\ncheck 2: sampling interval for sigma_day")
 print("  minutes   avg sigma_day   mean up/sigma   mean down/sigma   std close/sigma")
 mean_sigma, mean_up, mean_down, sd_close = [], [], [], []
