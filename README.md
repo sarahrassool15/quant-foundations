@@ -6,3 +6,5 @@ These include short experiments (and other ideas I've entertained) from my self-
 |---|---|---|
 | 01 | [Dice, Fourier and the shape of a sum](01-dice-fourier) | What's the exact distribution of 50 dice, how fast can I get it, and how wrong is the bell curve? |
 | 02 | [The leakage hunter](02-leakage-hunter) | How much predictive power can a pipeline "find" in pure noise? |
+| 03 | [Does Bitcoin's maximum behave like Brownian motion's?](03-bitcoin-maximum) | How far does Bitcoin wander from the open each day, and is that what Brownian motion predicts? |
+| 03 | [Does Bitcoin's maximum behave like Brownian motion's?](03-bitcoin-maximum) | How far does Bitcoin wander from the open each day, and is that what Brownian motion predicts? |
