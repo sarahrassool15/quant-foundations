@@ -12,3 +12,4 @@ These include short experiments (and other ideas I've entertained) from my self-
 | 06 | [Gambler's ruin on a leveraged long](06-gamblers-ruin) | With a 10x Bitcoin long, which comes first, liquidation or take profit? |
 | 07 | [Random walkers and the heat equation](07-walkers-heat) | Is the heat equation really just a crowd of people flipping coins? |
 | 08 | [One option, five methods](08-five-methods) | Formula, tree, Monte Carlo, finite differences and Fourier on the same option: which gets there fastest? |
+| 09 | [How much does a delta hedge leak?](09-delta-hedge) | Do people who sell and hedge Bitcoin options actually make money? |
