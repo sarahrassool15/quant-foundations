@@ -31,7 +31,7 @@ names = ["calm", "normal", "turbulent"]
 n = len(state)
 print(f"{n} days")
 
-# ---- transition matrix: count, then divide each row by its total ----
+# transition matrix: count, then divide each row by its total 
 counts = np.zeros((3, 3))
 for a, b in zip(state[:-1], state[1:]):
     counts[a, b] += 1
@@ -48,7 +48,7 @@ vals = np.sort(np.abs(np.linalg.eigvals(P)))[::-1]
 print(f"\nsecond largest |eigenvalue| {vals[1]:.3f}: regime half-forgotten after "
       f"{np.log(0.5) / np.log(vals[1]):.1f} days")
 
-# ---- how long does turbulence last? ----
+# how long does turbulence last?
 # a Markov chain stays put with prob p each day, so a spell lasts k days with
 # prob p^(k-1)(1-p): geometric, mean 1/(1-p). check that against the real spells.
 def spells(s, target):
@@ -71,7 +71,7 @@ print(f"  longest: {turb.max()} days")
 for k in [3, 5, 10, 15]:
     print(f"  P(spell >= {k:2d} days): real {np.mean(turb >= k):.3f}   Markov {p_stay ** (k - 1):.3f}")
 
-# ---- the Markov test: does the day BEFORE yesterday matter? ----
+# the Markov test: does the day BEFORE yesterday matter?
 # compare P(turbulent tomorrow | turbulent today, turbulent yesterday)
 # with    P(turbulent tomorrow | turbulent today, NOT turbulent yesterday).
 # if Markov, these are the same number.
@@ -86,7 +86,7 @@ print(f"  difference {a.mean() - b.mean():+.3f}, about {(a.mean() - b.mean()) / 
 # NOTE: standard error of a difference of two independent proportions:
 # sqrt(p1(1-p1)/n1 + p2(1-p2)/n2). variances add, again.
 
-# ---- figures ----
+# figures 
 fig, ax = plt.subplots(1, 2, figsize=(12, 4.2))
 cmap = {0: "tab:green", 1: "tab:orange", 2: "tab:red"}
 ax[0].scatter(df["open_time"], df["close"], c=[cmap[s] for s in state], s=2)

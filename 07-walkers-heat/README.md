@@ -1,16 +1,16 @@
 # Random walkers and the heat equation
 
-I learned the heat equation in differential equations and finite differences in numerical analysis, and at no point did anyone mention that the heat equation is also just a crowd of people flipping coins. It came up again when I was working through Itô calculus, and I decided I had to check it myself.
+I learned the heat equation in differential equations and then now doing partials brought this idea back to me. And I also learnt finite differences in numerical analysis, and at no point did anyone mention that the heat equation is also just a crowd of people flipping coins. It came up again when I was working through Itô calculus a couple months aho, and so I decided to try and test it. 
 
 ## Coin flippers
 
-Each walker steps left or right by the square root of dt with equal chance. After a while the crowd should be spread out exactly like heat from a point source, which is a normal curve with variance t.
+Essentially, each walker steps left or right by the square root of dt with equal chance. After a while the crowd should be spread out exactly like heat from a point source, which is a normal curve with variance t
 
 ![walkers](figures/walkers.png)
 
 It is. With 100 walkers the histogram is a mess, and by 10,000 it's hard to tell apart from the curve. The error falls like one over the square root of the number of walkers, until somewhere around a million it starts to level off. More walkers can't fix the fact that 100 coin flips aren't exactly a normal distribution. Only smaller steps can.
 
-The one thing that tripped me up was the histogram coming out with every other bar empty. After an even number of steps a walker can only be on every other grid point, so the bins need to be twice as wide. Riveting stuff.
+The one thing that confused me up was the histogram coming out with every other bar empty. After an even number of steps a walker can only be on every other grid point, so the bins need to be twice as wide. Riveting stuff.
 
 ## Solving it on a grid
 

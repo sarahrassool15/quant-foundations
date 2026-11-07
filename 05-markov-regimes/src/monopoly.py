@@ -1,5 +1,5 @@
 """
-Which Monopoly square gets landed on most?
+Which Monopoly square gets landed on most? (played monopoly 2 days ago so I was curious)
 
 A Markov chain: where I go next depends only on where I am now (plus the
 dice), not on how I got here. So the whole game is one 40 x 40 matrix P,
