@@ -10,3 +10,4 @@ These include short experiments (and other ideas I've entertained) from my self-
 | 04 | [Kelly betting, and why traders bet half](04-kelly) | How much should you risk when your wealth multiplies, and what changes when you don't know your edge? |
 | 05 | [From Monopoly to market regimes](05-markov-regimes) | Does Bitcoin's volatility behave like a Markov chain? |
 | 06 | [Gambler's ruin on a leveraged long](06-gamblers-ruin) | With a 10x Bitcoin long, which comes first, liquidation or take profit? |
+| 07 | [Random walkers and the heat equation](07-walkers-heat) | Is the heat equation really just a crowd of people flipping coins? |
