@@ -14,3 +14,4 @@ These include short experiments (and other ideas I've entertained) from my self-
 | 08 | [One option, five methods](08-five-methods) | Formula, tree, Monte Carlo, finite differences and Fourier on the same option: which gets there fastest? |
 | 09 | [How much does a delta hedge leak?](09-delta-hedge) | Do people who sell and hedge Bitcoin options actually make money? |
 | 10 | [Does Bitcoin keep New York hours?](10-new-york-hours) | If Bitcoin's busy hour belongs to New York, does it move when the clocks change? |
+| 11 | [When did Bitcoin change?](11-when-bitcoin-changed) | Do the days Bitcoin's volatility actually switched line up with Covid, FTX, the halvings and the ETFs? |
